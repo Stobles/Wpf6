@@ -4,7 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 
 
-namespace WpfApp4.Pages
+namespace WpfApp6.Pages
 {
     /// <summary>
     /// Логика взаимодействия для Page1.xaml
@@ -23,6 +23,11 @@ namespace WpfApp4.Pages
                 return;
             }
             
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService?.Navigate(new Page2());
         }
     }
 }

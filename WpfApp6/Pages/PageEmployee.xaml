@@ -55,17 +55,6 @@
                 <DataGridTextColumn Header="Электронная почта"/>
             </DataGrid.Columns>
         </DataGrid>
-        <StackPanel.BorderFind>
-            <TextBlock Name="TextBlockSurname" Text="Фамилия" />
-            <TextBlock Name="TextBlockTitle" Text="Должность" />
-            <TextBox Name="TextBoxSurname" TextChanged="TextBoxSurname_TextChanged"/>
-            <Button Width="20" Name="ButtonFindSurname" ToolTip="Поиск по фамилии" IsEnabled="False" Click="ButtonFindSurname_Click">
-                <Image Source="../Images/search.png"/>
-            </Button>
-            <Button Width="20" Name="ButtonFindTitle" ToolTip="Поиск по должности" IsEnabled="False" Click="ButtonFindTitle_Click">
-                <Image Source="../Images/search.png" />
-            </Button>
-        </StackPanel.BorderFind>
     </StackPanel>
     <Page.CommandBindings>
         <CommandBinding Command="Undo" Executed="UndoCommandBinding_Executed" CanExecute="SaveCommandBinding_CanExecute" />

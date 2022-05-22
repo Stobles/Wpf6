@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WpfApp4.Pages
+namespace WpfApp6.Pages
 {
     /// <summary>
     /// Логика взаимодействия для CustomMenu.xaml
