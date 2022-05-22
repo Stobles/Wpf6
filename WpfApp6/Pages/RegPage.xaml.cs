@@ -25,7 +25,7 @@ namespace WpfApp6.Pages
             InitializeComponent();
         }
 
-        public int errors = 0;
+        public int nerrors = 0;
         public int nums = 0;
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -41,29 +41,51 @@ namespace WpfApp6.Pages
                 return;
             }
 
-            if (PasswordBox.Password.Length < 6) {
-                errors++;
+            if (PasswordBox.Password.Length >= 6) {
+                nerrors++;
             }
 
-            for (int i = 0; i < PasswordBox.Password.Length; i++) {
-                if (PasswordBox.Password[i] >= '0' && PasswordBox.Password[i] <= '9')
+            for (int i = 0; i < PasswordBox.Password.Length; i++)
+            {
+                if (!char.IsLower(PasswordBox.Password[i]))
                 {
-                    nums++;
-                    break;
-                }
-
-                if (PasswordBox.Password[i] >= '0' && PasswordBox.Password[i] <= '9')
-                {
-                    nums++;
+                    nerrors++;
+                    MessageBox.Show("Есть Большая буква");
                     break;
                 }
             }
 
-            if (nums <= 0) {
-                errors++;
+            for (int i = 0; i < PasswordBox.Password.Length; i++)
+            {
+                if (PasswordBox.Password[i] >= '0' && PasswordBox.Password[i] <= '9')
+                {
+                    nerrors++;
+                    MessageBox.Show("Есть Цифры");
+                    break;
+                }
             }
 
-            
+            for (int i = 0; i < PasswordBox.Password.Length; i++)
+            {
+                if (PasswordBox.Password[i] == '@' || PasswordBox.Password[i] == '!' || PasswordBox.Password[i] == '%' || PasswordBox.Password[i] == '^' || PasswordBox.Password[i] == '$' || PasswordBox.Password[i] == '#')
+                {
+                    MessageBox.Show("Есть символ");
+                    nerrors++;
+                    break;
+                }
+            }
+
+            MessageBox.Show(nerrors.ToString());
+
+            if (nerrors > 3) {
+                using (var db = new authEntities()) { 
+                    
+                }
+                NavigationService?.Navigate(new Page1());
+            }
+            else {
+                MessageBox.Show("Пароль не соотвествует нормам безопасности");
+            }
         }
     }
 }
