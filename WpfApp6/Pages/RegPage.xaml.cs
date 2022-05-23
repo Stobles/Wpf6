@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core.Objects;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+using System.Data.Common;
 
 namespace WpfApp6.Pages
 {
@@ -35,6 +39,7 @@ namespace WpfApp6.Pages
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
+
             if (string.IsNullOrEmpty(LoginBox.Text) || string.IsNullOrEmpty(PasswordBox.Password))
             {
                 MessageBox.Show("Введите логин и пароль");
@@ -50,7 +55,6 @@ namespace WpfApp6.Pages
                 if (!char.IsLower(PasswordBox.Password[i]))
                 {
                     nerrors++;
-                    MessageBox.Show("Есть Большая буква");
                     break;
                 }
             }
@@ -60,7 +64,6 @@ namespace WpfApp6.Pages
                 if (PasswordBox.Password[i] >= '0' && PasswordBox.Password[i] <= '9')
                 {
                     nerrors++;
-                    MessageBox.Show("Есть Цифры");
                     break;
                 }
             }
@@ -69,7 +72,6 @@ namespace WpfApp6.Pages
             {
                 if (PasswordBox.Password[i] == '@' || PasswordBox.Password[i] == '!' || PasswordBox.Password[i] == '%' || PasswordBox.Password[i] == '^' || PasswordBox.Password[i] == '$' || PasswordBox.Password[i] == '#')
                 {
-                    MessageBox.Show("Есть символ");
                     nerrors++;
                     break;
                 }
@@ -78,9 +80,18 @@ namespace WpfApp6.Pages
             MessageBox.Show(nerrors.ToString());
 
             if (nerrors > 3) {
-                using (var db = new authEntities()) { 
-                    
+                using (authEntities usersDB = new authEntities()) {
+                    users customer = new users
+                    {
+                        username = "Stoble",
+                        password = "fgfd",
+                    };
+
+                    usersDB.users.Add(customer);
+
+                    usersDB.SaveChanges();
                 }
+
                 NavigationService?.Navigate(new Page1());
             }
             else {
