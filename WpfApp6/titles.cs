@@ -12,9 +12,10 @@ namespace WpfApp6
     using System;
     using System.Collections.Generic;
     
-    public partial class users
+    public partial class titles
     {
-        public string username { get; set; }
-        public string password { get; set; }
+        public int C__поезда { get; set; }
+        public string Тип { get; set; }
+        public int Кол_во_свободных_мест_в_мягких { get; set; }
     }
 }

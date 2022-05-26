@@ -16,6 +16,8 @@ using System.Windows.Shapes;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Data.Common;
+using MySql.Data.MySqlClient;
+using System.Text.RegularExpressions;
 
 namespace WpfApp6.Pages
 {
@@ -37,6 +39,8 @@ namespace WpfApp6.Pages
             NavigationService?.Navigate(new Page1());
         }
 
+        MySqlConnection con = new MySqlConnection("server = 127.0.0.1; user id = root; database = auth");
+
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
 
@@ -46,15 +50,35 @@ namespace WpfApp6.Pages
                 return;
             }
 
-            if (PasswordBox.Password.Length >= 6) {
-                nerrors++;
+            con.Open();
+
+            if (RegCheck(nerrors) > 3 & isValid(LoginBox.Text) & isEmailMatch(LoginBox.Text) & PasswordBox.Password == PasswordBoxRepeat.Password) {
+                Registration(LoginBox.Text, PasswordBox.Password);
+                NavigationService?.Navigate(new Page1());
+            }
+            else {
+                MessageBox.Show("Пароль или почта не соотвествует");
+            }
+        }
+
+        private void Registration(string login, string password) {
+            MySqlCommand command = new MySqlCommand("INSERT INTO `users`(`username`, `password`) VALUES ("+ "'" + login + "'" + "," + "'" + password + "'" + ")", con);
+            command.ExecuteNonQuery();
+            con.Close();
+        }
+
+        private int RegCheck(int count) {
+
+            if (PasswordBox.Password.Length >= 6)
+            {
+                count++;
             }
 
             for (int i = 0; i < PasswordBox.Password.Length; i++)
             {
                 if (!char.IsLower(PasswordBox.Password[i]))
                 {
-                    nerrors++;
+                    count++;
                     break;
                 }
             }
@@ -63,7 +87,7 @@ namespace WpfApp6.Pages
             {
                 if (PasswordBox.Password[i] >= '0' && PasswordBox.Password[i] <= '9')
                 {
-                    nerrors++;
+                    count++;
                     break;
                 }
             }
@@ -72,31 +96,44 @@ namespace WpfApp6.Pages
             {
                 if (PasswordBox.Password[i] == '@' || PasswordBox.Password[i] == '!' || PasswordBox.Password[i] == '%' || PasswordBox.Password[i] == '^' || PasswordBox.Password[i] == '$' || PasswordBox.Password[i] == '#')
                 {
-                    nerrors++;
+                    count++;
                     break;
                 }
             }
 
-            MessageBox.Show(nerrors.ToString());
+            return count;
+        }
 
-            if (nerrors > 3) {
-                using (authEntities usersDB = new authEntities()) {
-                    users customer = new users
+        bool isValid(string email)
+        {
+            string pattern = "[.\\-_a-z0-9]+@([a-z0-9][\\-a-z0-9]+\\.)+[a-z]{2,6}";
+            Match isMatch = Regex.Match(email, pattern, RegexOptions.IgnoreCase);
+            return isMatch.Success;
+        }
+
+        bool isEmailMatch(string email) {
+            MySqlCommand command = new MySqlCommand("SELECT * FROM `users`", con);
+            MySqlDataReader reader = command.ExecuteReader();
+
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    if (reader.GetString(0) == email)
                     {
-                        username = "Stoble",
-                        password = "fgfd",
-                    };
-
-                    usersDB.users.Add(customer);
-
-                    usersDB.SaveChanges();
+                        return false;
+                    }
                 }
+            }
+            else
+            {
+                Console.WriteLine("No rows found.");
+                return false;
+            }
 
-                NavigationService?.Navigate(new Page1());
-            }
-            else {
-                MessageBox.Show("Пароль не соотвествует нормам безопасности");
-            }
+            reader.Close();
+
+            return true;
         }
     }
 }

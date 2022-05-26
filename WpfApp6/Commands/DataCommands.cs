@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace WpfApp4.Commands
+namespace WpfApp6.Commands
 {
     public class DataCommands
     {

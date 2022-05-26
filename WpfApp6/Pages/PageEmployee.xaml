@@ -1,15 +1,15 @@
-﻿<Page x:Class="WpfApp4.Pages.Page2"
+﻿<Page x:Class="WpfApp6.Pages.PageEmployee"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:WpfApp4.Pages"
-      xmlns:command="clr-namespace:WpfApp4.Commands"
+      xmlns:local="clr-namespace:WpfApp6.Pages"
+      xmlns:command="clr-namespace:WpfApp6.Commands"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="Page2">
+      d:DesignHeight="450"
+      Title="Page2" Width="962">
 
-    <StackPanel Margin="3" Background="{StaticResource BackgroundWindowResource}">
+    <StackPanel Margin="0,0,-1,0" Background="{StaticResource BackgroundWindowResource}" HorizontalAlignment="Left" Width="963" Height="450" VerticalAlignment="Top">
         <Menu>
             <MenuItem Header="Действие" >
                 <MenuItem Header="Отменить" Command="Undo"></MenuItem>
@@ -18,6 +18,7 @@
                 <MenuItem Header="Редактировать"></MenuItem>
                 <MenuItem Header="Сохранить" ></MenuItem>
                 <MenuItem Header="Найти" />
+                <MenuItem Header="Обновить" Command="Refresh"></MenuItem>
                 <Separator></Separator>
                 <MenuItem Header="Удалить" ></MenuItem>
             </MenuItem>
@@ -27,7 +28,7 @@
             <Button Name="Undo" Command="Undo" ToolTip="Отменить редактирование/создание" Margin="5,2,5,2">
                 <Image Source="../Images/undo.png" Width="20"/>
             </Button>
-            <Button Name="Add" ToolTip="Добавить" Margin="5,2,5,2">
+            <Button Name="Add" ToolTip="Добавить" Margin="0,0,0,2" VerticalAlignment="Bottom" Click="Add_Click">
                 <Image Source="../Images/add.png" Width="20"/>
             </Button>
             <Button Name="Edit" ToolTip="Редактировать" Margin="5,2,5,2">
@@ -42,21 +43,32 @@
             <Button Name="Delete" ToolTip="Удалить" Margin="5,2,5,2">
                 <Image Source="../Images/delete.png" Width="20"/>
             </Button>
+            <Button Name="Refresh" Margin="5,2,5,2" Command="Refresh" ToolTip="обновить данные по сотрудникам">
+                <Image Width="20" Source="../Images/Undo.png" ></Image>
+            </Button>
+
         </ToolBar>
-        <TextBlock Margin="5" >Список сотрудников</TextBlock>
-        <DataGrid Name="DataGridEmployee" >
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Фамилия"/>
-                <DataGridTextColumn Header="Имя"/>
-                <DataGridTextColumn Header="Отчество"/>
-                <DataGridComboBoxColumn Header="Должность" />
-                <DataGridTemplateColumn Header="Дата рождения" />
-                <DataGridTextColumn Header="Телефон"/>
-                <DataGridTextColumn Header="Электронная почта"/>
-            </DataGrid.Columns>
-        </DataGrid>
+        <Grid Height="80" Margin="683,0,10,0" Background="AliceBlue">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="139*"/>
+                <ColumnDefinition Width="53*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock x:Name="TextBlockSurname" Text="Фамилия" RenderTransformOrigin="2.483,0.812" Margin="10,23,127,40" />
+            <TextBox x:Name="TextBoxSurname" Margin="78,15,30,40" Grid.ColumnSpan="2" TextChanged="TextBoxSurname_TextChanged"/>
+            <ComboBox x:Name="ComboBoxTitle" Margin="78,40,30,15" Grid.ColumnSpan="2" SelectionChanged="ComboBoxTitle_SelectionChanged"/>
+            <TextBlock x:Name="TextBlockTitle" Text="Должность" RenderTransformOrigin="0.476,-0.471" Margin="9,46,118,15" />
+            <Button x:Name="ButtonFindSurname" ToolTip="Поиск по фамилии" IsEnabled="False" RenderTransformOrigin="0.505,1.833" Grid.Column="1" Margin="45,15,0,40" Click="ButtonFindSurname_Click">
+                <Image Width="20" Source="../Images/Search.png"/>
+            </Button>
+            <Button x:Name="ButtonFindTitle" Click="ButtonFindTitle_Click" ToolTip="Поиск по должности" IsEnabled="False" RenderTransformOrigin="0.5,0.5" Margin="45,40,0,15" Grid.Column="1">
+                <Image Width="20" Source="../Images/Search.png" RenderTransformOrigin="0.3,0.45" />
+            </Button>
+        </Grid>
+        <TextBlock Margin="5,5,264,5" >Список сотрудников</TextBlock>
+        <DataGrid x:Name="DataGridEmployee" Margin="0,0,281,0"/>
     </StackPanel>
     <Page.CommandBindings>
         <CommandBinding Command="Undo" Executed="UndoCommandBinding_Executed" CanExecute="SaveCommandBinding_CanExecute" />
+        <CommandBinding Command="Refresh" Executed="RefreshCommandBinding_Executed" />
     </Page.CommandBindings>
 </Page>

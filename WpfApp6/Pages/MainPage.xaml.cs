@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WpfApp4.Pages
+namespace WpfApp6.Pages
 {
     /// <summary>
     /// Логика взаимодействия для MainPage.xaml
@@ -27,7 +27,7 @@ namespace WpfApp4.Pages
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-
+            NavigationService?.Navigate(new Page1());
         }
     }
 }

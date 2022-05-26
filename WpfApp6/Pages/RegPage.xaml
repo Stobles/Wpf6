@@ -5,27 +5,29 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:WpfApp6.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
-      Title="Регистрация">
+      d:DesignHeight="300"
+      Title="Регистрация" Width="415.804">
 
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="98*"/>
-            <RowDefinition Height="105"/>
-            <RowDefinition Height="97*"/>
+            <RowDefinition Height="143"/>
+            <RowDefinition Height="59*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="50"/>
-            <ColumnDefinition Width="170"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="7*"/>
+            <ColumnDefinition Width="105"/>
+            <ColumnDefinition Width="181"/>
+            <ColumnDefinition Width="19*"/>
         </Grid.ColumnDefinitions>
-        <Label Content="Логин" Grid.Column="1" HorizontalAlignment="Left" Padding="0,5,0,5" Grid.Row="1" VerticalAlignment="Top" Width="50"/>
-        <Label Content="Пароль" HorizontalAlignment="Left"  Padding="0,5,0,5" Grid.Row="1" VerticalAlignment="Top" Width="50" Grid.Column="1" Margin="0,27,0,0"/>
-        <TextBox x:Name="LoginBox" Grid.Column="2" HorizontalAlignment="Left" Height="23" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="170" Margin="0,4,0,0"/>
-        <PasswordBox x:Name="PasswordBox" Grid.Column="2" HorizontalAlignment="Left" Height="21" Margin="0,32,0,0" Grid.Row="1" VerticalAlignment="Top" Width="170"/>
-        <Button Content="Регистрация" Grid.Column="2" HorizontalAlignment="Left" Margin="0,60,0,0" Grid.Row="1" VerticalAlignment="Top" Width="170" Click="Button_Click_1"/>
-        <Button Content="Назад" Grid.Column="2" HorizontalAlignment="Left" Margin="0,85,0,0" Grid.Row="1" VerticalAlignment="Top" Width="170" Click="Button_Click"/>
+        <Label Content="Логин" Grid.Column="1" HorizontalAlignment="Left" Padding="0,5,0,5" Grid.Row="1" VerticalAlignment="Top" Width="50" Height="26"/>
+        <Label Content="Пароль" HorizontalAlignment="Left"  Padding="0,5,0,5" Grid.Row="1" VerticalAlignment="Top" Width="50" Grid.Column="1" Margin="0,27,0,0" Height="26"/>
+        <TextBox x:Name="LoginBox" Grid.Column="2" HorizontalAlignment="Left" Height="23" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="167" Margin="13,4,0,0"/>
+        <PasswordBox x:Name="PasswordBox" Grid.Column="2" HorizontalAlignment="Left" Height="21" Margin="13,32,0,0" Grid.Row="1" VerticalAlignment="Top" Width="167"/>
+        <Button Content="Регистрация" Grid.Column="2" HorizontalAlignment="Left" Margin="13,88,0,0" Grid.Row="1" VerticalAlignment="Top" Width="167" Click="Button_Click_1" Height="20"/>
+        <Button Content="Назад" Grid.Column="2" HorizontalAlignment="Left" Margin="13,113,0,0" Grid.Row="1" VerticalAlignment="Top" Width="167" Click="Button_Click" Height="20"/>
+        <Label Content="Повторите пароль&#xD;&#xA;" HorizontalAlignment="Left"  Padding="0,5,0,5" Grid.Row="1" VerticalAlignment="Top" Width="113" Grid.Column="1" Margin="0,53,0,0" Height="26" Grid.ColumnSpan="2"/>
+        <PasswordBox x:Name="PasswordBoxRepeat" Grid.Column="2" HorizontalAlignment="Left" Height="21" Margin="13,58,0,0" Grid.Row="1" VerticalAlignment="Top" Width="167"/>
 
     </Grid>
 </Page>

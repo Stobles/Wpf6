@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp6"
         mc:Ignorable="d"
-        Title="MainWindow" Height="380" Width="650">
+        Title="MainWindow" Height="380" Width="980">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="42"/>
@@ -13,7 +13,7 @@
             <RowDefinition Height="29"/>
         </Grid.RowDefinitions>
         <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="0" Grid.Row="2" Stroke="Black" VerticalAlignment="Top" Width="517" StrokeThickness="0" Margin="0,42,0,-13"/>
-        <Frame Name="frame1" Source="Pages/RegPage.xaml" Foreground="#FFE4D8D8" BorderBrush="#FFF7F3F3" Background="#FFB3D9E5" Grid.RowSpan="3"/>
+        <Frame Name="frame1" Source="Pages/PageEmployee.xaml" Foreground="#FFE4D8D8" BorderBrush="#FFF7F3F3" Background="#FFB3D9E5" Grid.RowSpan="3"/>
 
     </Grid>
 </Window>

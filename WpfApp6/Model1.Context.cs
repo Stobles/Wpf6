@@ -13,10 +13,10 @@ namespace WpfApp6
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class authEntities : DbContext
+    public partial class vokzalEntities : DbContext
     {
-        public authEntities()
-            : base("name=authEntities")
+        public vokzalEntities()
+            : base("name=vokzalEntities")
         {
         }
     
@@ -25,6 +25,8 @@ namespace WpfApp6
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<users> users { get; set; }
+        public virtual DbSet<таблица_1> таблица_1 { get; set; }
+        public virtual DbSet<titles> titles { get; set; }
+        public virtual DbSet<таблица_2> таблица_2 { get; set; }
     }
 }

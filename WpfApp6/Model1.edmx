@@ -4,52 +4,121 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище authModel" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Хранилище жд_вокзалModel" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <!--Ошибки, обнаруженные при создании:
-предупреждение 6002: В таблице или представлении "def.auth.users" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
-        <EntityType Name="users">
+предупреждение 6002: В таблице или представлении "def.жд_вокзал.titles" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="titles">
           <Key>
-            <PropertyRef Name="username" />
-            <PropertyRef Name="password" />
+            <PropertyRef Name="№_поезда" />
+            <PropertyRef Name="Тип" />
+            <PropertyRef Name="Кол-во свободных мест в мягких" />
           </Key>
-          <Property Name="username" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="password" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="№_поезда" Type="int" Nullable="false" />
+          <Property Name="Тип" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Кол-во свободных мест в мягких" Type="int" Nullable="false" />
         </EntityType>
-        <EntityContainer Name="Хранилище authModelContainer">
-          <EntitySet Name="users" EntityType="Self.users" store:Type="Tables" store:Schema="auth">
+        <EntityType Name="таблица_1">
+          <Key>
+            <PropertyRef Name="№_поезда" />
+          </Key>
+          <Property Name="№_поезда" Type="int" Nullable="false" />
+          <Property Name="Пункт_назанчения" Type="varchar" MaxLength="45" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "def.жд_вокзал.таблица_2" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="таблица_2">
+          <Key>
+            <PropertyRef Name="№_поезда" />
+            <PropertyRef Name="Тип" />
+            <PropertyRef Name="Кол-во свободных мест в мягких" />
+          </Key>
+          <Property Name="№_поезда" Type="int" Nullable="false" />
+          <Property Name="Тип" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Кол-во свободных мест в мягких" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="Хранилище жд_вокзалModelContainer">
+          <EntitySet Name="таблица_1" EntityType="Self.таблица_1" Schema="жд_вокзал" store:Type="Tables" />
+          <EntitySet Name="titles" EntityType="Self.titles" store:Type="Tables" store:Schema="жд_вокзал">
             <DefiningQuery>SELECT
-`users`.`username`, 
-`users`.`password`
-FROM `users` AS `users`</DefiningQuery>
+`titles`.`№_поезда`, 
+`titles`.`Тип`, 
+`titles`.`Кол-во свободных мест в мягких`
+FROM `titles` AS `titles`</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="таблица_2" EntityType="Self.таблица_2" store:Type="Tables" store:Schema="жд_вокзал">
+            <DefiningQuery>SELECT
+`таблица_2`.`№_поезда`, 
+`таблица_2`.`Тип`, 
+`таблица_2`.`Кол-во свободных мест в мягких`
+FROM `таблица_2` AS `таблица_2`</DefiningQuery>
           </EntitySet>
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="authModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="users">
+      <Schema Namespace="жд_вокзалModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="таблица_1">
           <Key>
-            <PropertyRef Name="username" />
-            <PropertyRef Name="password" />
+            <PropertyRef Name="C__поезда" />
           </Key>
-          <Property Name="username" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="password" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="C__поезда" Type="Int32" Nullable="false" />
+          <Property Name="Пункт_назанчения" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityContainer Name="authEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="users" EntityType="Self.users" />
+        <EntityType Name="titles">
+          <Key>
+            <PropertyRef Name="C__поезда" />
+            <PropertyRef Name="Тип" />
+            <PropertyRef Name="Кол_во_свободных_мест_в_мягких" />
+          </Key>
+          <Property Name="C__поезда" Type="Int32" Nullable="false" />
+          <Property Name="Тип" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Кол_во_свободных_мест_в_мягких" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="таблица_2">
+          <Key>
+            <PropertyRef Name="C__поезда" />
+            <PropertyRef Name="Тип" />
+            <PropertyRef Name="Кол_во_свободных_мест_в_мягких" />
+          </Key>
+          <Property Name="C__поезда" Type="Int32" Nullable="false" />
+          <Property Name="Тип" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Кол_во_свободных_мест_в_мягких" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="vokzalEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="таблица_1" EntityType="Self.таблица_1" />
+          <EntitySet Name="titles" EntityType="Self.titles" />
+          <EntitySet Name="таблица_2" EntityType="Self.таблица_2" />
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище authModelContainer" CdmEntityContainer="authEntities">
-          <EntitySetMapping Name="users">
-            <EntityTypeMapping TypeName="authModel.users">
-              <MappingFragment StoreEntitySet="users">
-                <ScalarProperty Name="username" ColumnName="username" />
-                <ScalarProperty Name="password" ColumnName="password" />
+        <EntityContainerMapping StorageEntityContainer="Хранилище жд_вокзалModelContainer" CdmEntityContainer="vokzalEntities">
+          <EntitySetMapping Name="таблица_1">
+            <EntityTypeMapping TypeName="жд_вокзалModel.таблица_1">
+              <MappingFragment StoreEntitySet="таблица_1">
+                <ScalarProperty Name="C__поезда" ColumnName="№_поезда" />
+                <ScalarProperty Name="Пункт_назанчения" ColumnName="Пункт_назанчения" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="titles">
+            <EntityTypeMapping TypeName="жд_вокзалModel.titles">
+              <MappingFragment StoreEntitySet="titles">
+                <ScalarProperty Name="C__поезда" ColumnName="№_поезда" />
+                <ScalarProperty Name="Тип" ColumnName="Тип" />
+                <ScalarProperty Name="Кол_во_свободных_мест_в_мягких" ColumnName="Кол-во свободных мест в мягких" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="таблица_2">
+            <EntityTypeMapping TypeName="жд_вокзалModel.таблица_2">
+              <MappingFragment StoreEntitySet="таблица_2">
+                <ScalarProperty Name="C__поезда" ColumnName="№_поезда" />
+                <ScalarProperty Name="Тип" ColumnName="Тип" />
+                <ScalarProperty Name="Кол_во_свободных_мест_в_мягких" ColumnName="Кол-во свободных мест в мягких" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
