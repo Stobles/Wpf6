@@ -128,6 +128,7 @@ namespace WpfApp6.Pages
 
                 ButtonFindSurname.IsEnabled = true;
                 ButtonFindTitle.IsEnabled = false;
+
             }
             else
             {
